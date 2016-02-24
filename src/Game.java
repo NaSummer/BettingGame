@@ -3,6 +3,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -24,9 +26,12 @@ int level;
 		root = new Group();  
         Canvas canvas = new Canvas(700, 470);
         Button[] buttons = new Button[level+1];
-       
-        
-        
+        ImageView imageBack = new ImageView(new Image(getClass() 
+                .getResourceAsStream("/background.png")));
+        imageBack.setFitWidth(700);
+		imageBack.setFitHeight(470);
+		
+        root.getChildren().add(imageBack);
         root.getChildren().add(canvas);
         for(int i=0;i<buttons.length;i++){
         	buttons[i] = new Button(""+(i+1));
@@ -43,7 +48,8 @@ int level;
         	}
         	if(buttons.length==5){
         		buttons[i].setLayoutX(150*i);
-        	}else {
+        	}
+        	if(buttons.length==6){
         		if(i==5){
         			buttons[i].setLayoutX(300);
         			buttons[i].setLayoutY(270);
@@ -54,8 +60,9 @@ int level;
         	root.getChildren().add(buttons[i]);
         }
         
+        
         Scene scene = new Scene(root);
-//		scene.getStylesheets().add("/Choose.css");     
+		scene.getStylesheets().add("/game.css");     
         primaryStage.setScene(scene);  
         primaryStage.show(); 
 	}
