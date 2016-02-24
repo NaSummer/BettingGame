@@ -1,15 +1,23 @@
 
+import java.io.IOException;
+
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Choose extends Application {
-int initialMoney =1500;
+int initialMoney = 1500;
 Button level1Button = new Button("Easy");
 Button level2Button = new Button("Normal");
 Button level3Button = new Button("Hard");
@@ -17,7 +25,11 @@ Button level4Button = new Button("Extreme");
 Button level5Button = new Button("Impossible");
 Label titleLabel = new Label("Select your difficulty level");
 Label moneyLabel = new Label("money:"+ initialMoney);
+int level = 1;
 Group root;
+	public Choose() {
+		
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -30,12 +42,12 @@ Group root;
 		primaryStage.setResizable(false);
         root = new Group();  
         Canvas canvas = new Canvas(700, 470);
-        
-        ImageView image1 = new ImageView(new Image(getClass() 
+        level1Button = new Button("Easy");
+        ImageView imageBack = new ImageView(new Image(getClass() 
                 .getResourceAsStream("/1234.jpg"))); 
 //		image2.resize(500, 400);
-		image1.setFitWidth(700);
-		image1.setFitHeight(470);
+		imageBack.setFitWidth(700);
+		imageBack.setFitHeight(470);
 		
         // 设置button们
         level1Button.setLayoutX(250);
@@ -60,9 +72,100 @@ Group root;
         
         titleLabel.setLayoutX(10);
         moneyLabel.setLayoutX(560);
+        
+        
+        level1Button.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				level = 1; 
+				Platform.runLater(new Runnable() {  
+				    public void run() {               
+				        try {
+							new Game(level).start(new Stage());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}  
+				    }
+				});
+			}
+        });
+        
+        level2Button.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				level = 2; 
+				Platform.runLater(new Runnable() {  
+				    public void run() {               
+				        try {
+							new Game(level).start(new Stage());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}  
+				    }
+				});
+			}
+        });
+        
+        level3Button.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				level = 3; 
+				Platform.runLater(new Runnable() {  
+				    public void run() {               
+				        try {
+							new Game(level).start(new Stage());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}  
+				    }
+				});
+			}
+        });
+        
+        level4Button.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				level = 4; 
+				Platform.runLater(new Runnable() {  
+				    public void run() {               
+				        try {
+							new Game(level).start(new Stage());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}  
+				    }
+				});
+			}
+        });
+        level5Button.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				level = 5; 
+				Platform.runLater(new Runnable() {  
+				    public void run() {               
+				        try {
+							new Game(level).start(new Stage());
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}  
+				    }
+				});
+			}
+        });
+
         //添加组件到面板
         root.getChildren().add(canvas);
-        root.getChildren().add(image1);
+        root.getChildren().add(imageBack);
         root.getChildren().add(level1Button);
         root.getChildren().add(level2Button);
         root.getChildren().add(level3Button);
@@ -79,5 +182,4 @@ Group root;
         primaryStage.show(); 
 
 	}
-
 }
