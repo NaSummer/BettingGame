@@ -17,19 +17,27 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Choose extends Application {
-int initialMoney = 1500;
+private int initialMoney = 1500;
 Button level1Button = new Button("Easy");
 Button level2Button = new Button("Normal");
 Button level3Button = new Button("Hard");
 Button level4Button = new Button("Extreme");
 Button level5Button = new Button("Impossible");
+
+	public int getInitialMoney() {
+		return initialMoney;
+	}
+	public void setInitialMoney(int initialMoney) {
+		this.initialMoney = initialMoney;
+	}
+	public Choose() {
+	
+	}
 Label titleLabel = new Label("Select your difficulty level");
 Label moneyLabel = new Label("money:"+ initialMoney);
 int level = 1;
 Group root;
-	public Choose() {
-		
-	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
