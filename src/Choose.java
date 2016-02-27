@@ -50,7 +50,7 @@ Group root;
 	Label titleLabel = new Label("Select your difficulty level");
 	Label moneyLabel = new Label("money:" + initialMoney);
 	int level = 1;
-	Group root;
+	Group root = new Group();
 
 	public Choose() {
 
@@ -67,7 +67,7 @@ Group root;
 		// TODO Auto-generated method stub
 		primaryStage.setTitle("Choose");
 		primaryStage.setResizable(false);
-		root = new Group();
+//		root = new Group();
 		Canvas canvas = new Canvas(700, 470);
 		level1Button = new Button("Easy");
 		ImageView imageBack = new ImageView(new Image(getClass().getResourceAsStream("/1234.jpg")));
