@@ -1,6 +1,4 @@
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -10,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Game extends Application {
@@ -25,18 +22,14 @@ public class Game extends Application {
 
 	public Game(int level) {
 		this.level = level;
-
 	}
 
 	// public static void main(String[] args) {
-	// TODO Auto-generated method stub
 	// launch(args);
 	// }
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
-		// TODO Auto-generated method stub
 
 		// 随机建一个正确答案
 		Choose choose = new Choose();
