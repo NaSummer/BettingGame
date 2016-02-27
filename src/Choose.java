@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -17,46 +16,31 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Choose extends Application {
-<<<<<<< HEAD
-private int initialMoney = 1500;
-Button level1Button = new Button("Easy");
-Button level2Button = new Button("Normal");
-Button level3Button = new Button("Hard");
-Button level4Button = new Button("Extreme");
-Button level5Button = new Button("Impossible");
 
-	public int getInitialMoney() {
-		return initialMoney;
-	}
-	public void setInitialMoney(int initialMoney) {
-		this.initialMoney = initialMoney;
-	}
-	public Choose() {
-	
-	}
-Label titleLabel = new Label("Select your difficulty level");
-Label moneyLabel = new Label("money:"+ initialMoney);
-int level = 1;
-Group root;
-	
-=======
-	
-	int initialMoney = 1500;
+	private int initialMoney = 1500;
 	Button level1Button = new Button("Easy");
 	Button level2Button = new Button("Normal");
 	Button level3Button = new Button("Hard");
 	Button level4Button = new Button("Extreme");
 	Button level5Button = new Button("Impossible");
-	Label titleLabel = new Label("Select your difficulty level");
-	Label moneyLabel = new Label("money:" + initialMoney);
-	int level = 1;
-	Group root = new Group();
+
+	public int getInitialMoney() {
+		return initialMoney;
+	}
+
+	public void setInitialMoney(int initialMoney) {
+		this.initialMoney = initialMoney;
+	}
 
 	public Choose() {
 
 	}
 
->>>>>>> origin/dev
+	Label titleLabel = new Label("Select your difficulty level");
+	Label moneyLabel = new Label("money:" + initialMoney);
+	int level = 1;
+	Group root;
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -67,7 +51,7 @@ Group root;
 		// TODO Auto-generated method stub
 		primaryStage.setTitle("Choose");
 		primaryStage.setResizable(false);
-//		root = new Group();
+		// root = new Group();
 		Canvas canvas = new Canvas(700, 470);
 		level1Button = new Button("Easy");
 		ImageView imageBack = new ImageView(new Image(getClass().getResourceAsStream("/1234.jpg")));
