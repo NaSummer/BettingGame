@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -104,7 +106,8 @@ public class Game extends Application {
 				@Override
 				public void handle(MouseEvent event) {
 					// 随机建一个正确答案
-					rightAnswer = (int) (Math.random() * (level+1));
+					Random random = new Random();
+					rightAnswer = random.nextInt(level + 1);
 					System.out.println("right" + rightAnswer);
 					counter++;
 					lab_counter.setText("Counter: " + counter);
