@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -27,6 +28,7 @@ public class Game extends Application {
 	private int rightAnswer;
 	private int rightCount;
 	Button[] buttons;
+	Button back;
 	
 	int price[][] = {{-200, -711, -1350, -2048, -2778}, {0, 0, 0, 0, 0}, {27, 90, 213, 417, 720}, {160, 810, 2560, 6250, 12960}}; 
 
@@ -102,7 +104,7 @@ public class Game extends Application {
 				@Override
 				public void handle(MouseEvent event) {
 					// 随机建一个正确答案
-					rightAnswer = (int) (Math.random() * level);
+					rightAnswer = (int) (Math.random() * (level+1));
 					System.out.println("right" + rightAnswer);
 					counter++;
 					lab_counter.setText("Counter: " + counter);
@@ -116,11 +118,28 @@ public class Game extends Application {
 					
 					// game over
 					if (counter == MAX_TIMES) {
-						money += price[rightCount][level];
-						choose.setMoney(money);
-						choose.moneyLabel.setText("Money: " + money);
-						choose.primaryStage.show();
-						primaryStage.close();
+						money += price[rightCount][level-1];
+//						choose.setMoney(money);
+//						choose.moneyLabel.setText("Money: " + money);
+//						choose.primaryStage.show();
+//						primaryStage.close();
+						for(int i=0;i<buttons.length;i++){
+							buttons[i].setVisible(false);
+						}
+						back = new Button("Back");
+						back.setLayoutX(300);
+						back.setLayoutY(210);
+						back.setPrefSize(100, 50);
+						back.setOnMouseClicked(new EventHandler<MouseEvent>() {
+							@Override
+							public void handle(MouseEvent event) {
+								choose.setMoney(money);
+								choose.moneyLabel.setText("Money: " + money);
+								choose.primaryStage.show();
+								primaryStage.close();
+							}
+						});
+						root.getChildren().add(back);
 					}
 					// Stage secondWindow=new Stage();
 					// Group root = new Group();
