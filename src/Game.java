@@ -1,7 +1,6 @@
 import java.util.Random;
 
 import javafx.application.Application;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -170,3 +169,4 @@ public class Game extends Application {
 	}
 	
 }
+
