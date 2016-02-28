@@ -147,7 +147,6 @@ public class Choose extends Application {
 					primaryStage.hide();
 					new Explanation(choose).start(new Stage());
 				} catch (Exception e) {
-					// TODO
 					System.err.println("Open new Explanation window fail.");
 					e.printStackTrace();
 				}

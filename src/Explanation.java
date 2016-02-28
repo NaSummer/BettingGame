@@ -66,9 +66,8 @@ public class Explanation extends Application {
 		btn_back.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				primaryStage.hide();
-				new Choose(choose.getMoney());
+				choose.primaryStage.show();
+				primaryStage.close();
 			}
 		});
 

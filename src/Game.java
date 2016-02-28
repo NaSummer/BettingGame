@@ -36,6 +36,7 @@ public class Game extends Application {
 		this.counter = 0;
 		this.rightAnswer = 0;
 		this.rightCount = 0;
+		this.choose = choose;
 	}
 
 	@Override
@@ -116,8 +117,10 @@ public class Game extends Application {
 					// game over
 					if (counter == MAX_TIMES) {
 						money =+ price[rightCount][level];
-						new Choose(money);
-						primaryStage.hide();
+						choose.setMoney(money);
+						choose.moneyLabel.setText("Money: " + money);
+						choose.primaryStage.show();
+						primaryStage.close();
 					}
 					// Stage secondWindow=new Stage();
 					// Group root = new Group();
@@ -130,7 +133,6 @@ public class Game extends Application {
 			// buttons[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
 			// @Override
 			// public void handle(MouseEvent event) {
-			// // TODO Auto-generated method stub
 			// rightAnswer = (int) (Math.random() * level);
 			// System.out.println(rightAnswer);
 			// System.out.println("wrong!!");
