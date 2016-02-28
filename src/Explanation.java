@@ -24,7 +24,7 @@ public class Explanation extends Application {
 	
 	Label lab_gameName = new Label("Expanation");
 	Label lab_explanation = new Label();
-	Button btn_back = new Button();
+	Button btn_back = new Button("Back");
 	Group root = new Group();
 
 	public Explanation(Choose choose) {
