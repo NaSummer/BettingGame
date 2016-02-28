@@ -116,7 +116,7 @@ public class Game extends Application {
 					
 					// game over
 					if (counter == MAX_TIMES) {
-						money =+ price[rightCount][level];
+						money += price[rightCount][level];
 						choose.setMoney(money);
 						choose.moneyLabel.setText("Money: " + money);
 						choose.primaryStage.show();

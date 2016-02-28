@@ -54,8 +54,8 @@ public class Explanation extends Application {
 		lab_gameName.setLayoutY(10);
 		lab_explanation.setLayoutX(50);
 		lab_explanation.setLayoutY(100);
-		btn_back.setLayoutX(10);
-		btn_back.setLayoutY(450);
+		btn_back.setLayoutX(620);
+		btn_back.setLayoutY(440);
 
 		root.getChildren().add(imageBack);
 		root.getChildren().add(canvas);
