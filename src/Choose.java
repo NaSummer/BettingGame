@@ -12,20 +12,30 @@ import javafx.stage.Stage;
 
 public class Choose extends Application {
 
-	private int initialMoney = 1500;
+	Choose choose;
+	Stage primaryStage;
+	
+	private int money = 1500;
 	Button btn_level1 = new Button("Easy");
 	Button btn_level2 = new Button("Normal");
 	Button btn_level3 = new Button("Hard");
 	Button btn_level4 = new Button("Extreme");
 	Button btn_level5 = new Button("Impossible");
+	Button btn_explanation = new Button("Explanation");
 	Label titleLabel = new Label("Select your difficulty level");
-	Label moneyLabel = new Label("money:" + initialMoney);
-	int level = 1;
+	Label moneyLabel = new Label("money:" + money);
 	Group root = new Group();
 	
 	// === Constructor ===
 	public Choose() {
+		this.choose = this;
 	}
+	
+	public Choose(int money) {
+		this.choose = this;
+		this.money = money;
+	}
+	
 	// === main ===
 	public static void main(String[] args) {
 		launch(args);
@@ -33,7 +43,8 @@ public class Choose extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
+		
+		this.primaryStage = primaryStage;
 		primaryStage.setTitle("Choose");
 		primaryStage.setResizable(false);
 
@@ -64,6 +75,9 @@ public class Choose extends Application {
 		btn_level5.setLayoutX(250);
 		btn_level5.setLayoutY(370);
 		btn_level5.setPrefSize(210, 50);
+		
+		btn_explanation.setLayoutX(560);
+		btn_explanation.setLayoutY(420);
 
 		titleLabel.setLayoutX(10);
 		moneyLabel.setLayoutX(560);
@@ -71,89 +85,38 @@ public class Choose extends Application {
 		btn_level1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				level = 1;
-				Platform.runLater(new Runnable() {
-					public void run() {
-						try {
-							new Game(level).start(new Stage());
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
+				startGame(1);
 			}
 		});
-
 		btn_level2.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				level = 2;
-				Platform.runLater(new Runnable() {
-					public void run() {
-						try {
-							new Game(level).start(new Stage());
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
+				startGame(2);
 			}
 		});
-
 		btn_level3.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				level = 3;
-				Platform.runLater(new Runnable() {
-					public void run() {
-						try {
-							new Game(level).start(new Stage());
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
+				startGame(3);
 			}
 		});
-
 		btn_level4.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				level = 4;
-				Platform.runLater(new Runnable() {
-					public void run() {
-						try {
-							new Game(level).start(new Stage());
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
+				startGame(4);
 			}
 		});
 		btn_level5.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				level = 5;
-				Platform.runLater(new Runnable() {
-					public void run() {
-						try {
-							new Game(level).start(new Stage());
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
+				startGame(5);
+			}
+		});
+		
+		btn_explanation.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				openExplanation();
 			}
 		});
 
@@ -165,6 +128,7 @@ public class Choose extends Application {
 		root.getChildren().add(btn_level3);
 		root.getChildren().add(btn_level4);
 		root.getChildren().add(btn_level5);
+		root.getChildren().add(btn_explanation);
 		root.getChildren().add(titleLabel);
 		root.getChildren().add(moneyLabel);
 
@@ -176,12 +140,41 @@ public class Choose extends Application {
 
 	}
 	
-	public int getInitialMoney() {
-		return initialMoney;
+	private void openExplanation() {
+		Platform.runLater(new Runnable() {
+			public void run() {
+				try {
+					primaryStage.hide();
+					new Explanation(choose).start(new Stage());
+				} catch (Exception e) {
+					// TODO
+					System.err.println("Open new Explanation window fail.");
+					e.printStackTrace();
+				}
+			}
+		});
+		
 	}
 	
-	public void setInitialMoney(int initialMoney) {
-		this.initialMoney = initialMoney;
+	private void startGame(int level) {
+		Platform.runLater(new Runnable() {
+			public void run() {
+				try {
+					primaryStage.hide();
+					new Game(choose, level).start(new Stage());
+				} catch (Exception e) {
+					System.err.println("Open new game window fail (level " + level + ").");
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public int getMoney() {
+		return money;
+	}
+	public void setMoney(int money) {
+		this.money = money;
 	}
 	
 }

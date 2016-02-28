@@ -11,55 +11,64 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class Game extends Application {
-	Label levelLabel;
-	Label rightNum;
-	Label nowMoney;
-	Group root;
-	int level;
-	int rightAnswer;
-	int rightCount = 0;
+	
+	private final int MAX_TIMES = 3;
+	
+	Choose choose;
+	
+	Label lab_level;
+	Label lab_rightNum;
+	Label lab_nowMoney;
+	Label lab_counter;
+	Group root = new Group();
+	private int money;
+	private int level;
+	private int counter;
+	private int rightAnswer;
+	private int rightCount;
 	Button[] buttons;
+	
+	int price[][] = {{-200, -711, -1350, -2048, -2778}, {0, 0, 0, 0, 0}, {27, 90, 213, 417, 720}, {160, 810, 2560, 6250, 12960}}; 
 
-	public Game(int level) {
+	public Game(Choose choose, int level) {
 		this.level = level;
+		this.money = choose.getMoney();
+		this.counter = 0;
+		this.rightAnswer = 0;
+		this.rightCount = 0;
 	}
-
-	// public static void main(String[] args) {
-	// launch(args);
-	// }
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		// 随机建一个正确答案
-		Choose choose = new Choose();
-		rightAnswer = (int) (Math.random() * level);
-		System.out.println(rightAnswer);
 		System.out.println("l:" + level);
-
-		buttons = new Button[level + 1];
-		levelLabel = new Label("Level: " + level);
-		rightNum = new Label("Right: " + rightCount);
-		nowMoney = new Label("Money: " + choose.getInitialMoney());
-
-		levelLabel.setLayoutX(10);
-		rightNum.setLayoutX(100);
-		nowMoney.setLayoutX(560);
 
 		primaryStage.setTitle("Gaming now");
 		primaryStage.setResizable(false);
-		root = new Group();
 		Canvas canvas = new Canvas(700, 470);
 		ImageView imageBack = new ImageView(new Image(getClass().getResourceAsStream("/background.png")));
 		imageBack.setFitWidth(700);
 		imageBack.setFitHeight(470);
 
+		buttons = new Button[level + 1];
+		lab_level = new Label("Level: " + level);
+		lab_rightNum = new Label("Right: " + rightCount);
+		lab_counter = new Label("Counter: " + counter);
+		lab_nowMoney = new Label("Money: " + money);
+
+		lab_level.setLayoutX(10);
+		lab_rightNum.setLayoutX(100);
+		lab_nowMoney.setLayoutX(560);
+		lab_counter.setLayoutX(190);
+
 		root.getChildren().add(imageBack);
 		root.getChildren().add(canvas);
-		root.getChildren().add(levelLabel);
-		root.getChildren().add(rightNum);
-		root.getChildren().add(nowMoney);
-		// add some buttons
+		root.getChildren().add(lab_level);
+		root.getChildren().add(lab_rightNum);
+		root.getChildren().add(lab_nowMoney);
+		root.getChildren().add(lab_counter);
+
+		// add buttons
 		for (int i = 0; i < buttons.length; i++) {
 			buttons[i] = new Button("" + (i + 1));
 			buttons[i].setPrefSize(100, 50);
@@ -86,36 +95,47 @@ public class Game extends Application {
 			}
 			root.getChildren().add(buttons[i]);
 		}
+
 		for (int i = 0; i < buttons.length; i++) {
-			if (i == rightAnswer) {
-				buttons[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent event) {
-						// TODO Auto-generated method stub
+			buttons[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					// 随机建一个正确答案
+					rightAnswer = (int) (Math.random() * level);
+					System.out.println("right" + rightAnswer);
+					counter++;
+					lab_counter.setText("Counter: " + counter);
+					if (event.getSource().equals(buttons[rightAnswer])) {
 						rightCount++;
-						rightNum.setText("Right: " + rightCount);
-						rightAnswer = (int) (Math.random() * level);
-						System.out.println(rightAnswer);
+						lab_rightNum.setText("Right: " + rightCount);
 						System.out.println("right!!");
-						// Stage secondWindow=new Stage();
-						// Group root = new Group();
-						// Scene scene=new Scene(root,300,275);
-						// secondWindow.setTitle("secondWindow");
-						// secondWindow.setScene(scene);
-						// secondWindow.show();
-					}
-				});
-			} else {
-				buttons[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent event) {
-						// TODO Auto-generated method stub
-						rightAnswer = (int) (Math.random() * level);
-						System.out.println(rightAnswer);
+					} else {
 						System.out.println("wrong!!");
 					}
-				});
-			}
+					
+					// game over
+					if (counter == MAX_TIMES) {
+						money =+ price[rightCount][level];
+						new Choose(money);
+						primaryStage.hide();
+					}
+					// Stage secondWindow=new Stage();
+					// Group root = new Group();
+					// Scene scene=new Scene(root,300,275);
+					// secondWindow.setTitle("secondWindow");
+					// secondWindow.setScene(scene);
+					// secondWindow.show();
+				}
+			});
+			// buttons[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+			// @Override
+			// public void handle(MouseEvent event) {
+			// // TODO Auto-generated method stub
+			// rightAnswer = (int) (Math.random() * level);
+			// System.out.println(rightAnswer);
+			// System.out.println("wrong!!");
+			// }
+			// });
 		}
 
 		Scene scene = new Scene(root);
@@ -124,5 +144,5 @@ public class Game extends Application {
 		primaryStage.show();
 
 	}
-
+	
 }
