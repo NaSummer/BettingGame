@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,7 +25,6 @@ public class Explanation extends Application {
 	private Label lab_gameName = new Label("Expanation");
 	private Label lab_explanation = new Label();
 	private Button btn_back = new Button("Back");
-	private TableView<String> tbl_price = new TableView<String>();
 
 	public Explanation(Choose choose) {
 		this.choose = choose;
@@ -41,7 +39,6 @@ public class Explanation extends Application {
 
 		this.primaryStage = primaryStage;
 		
-		// TODO add explanation
 		lab_explanation.setMaxWidth(600);
 		lab_explanation.setWrapText(true);
 		lab_explanation.setText("\tThis game has 5 difficulties. The number of buttons will change with the gaming level. "
