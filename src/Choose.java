@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
@@ -14,28 +15,27 @@ public class Choose extends Application {
 
 	Choose choose;
 	Stage primaryStage;
-	
+
 	private int money = 1500;
-	Button btn_level1 = new Button("Easy");
-	Button btn_level2 = new Button("Normal");
-	Button btn_level3 = new Button("Hard");
-	Button btn_level4 = new Button("Extreme");
-	Button btn_level5 = new Button("Impossible");
-	Button btn_explanation = new Button("Explanation");
-	Label titleLabel = new Label("Select your difficulty level");
-	Label moneyLabel = new Label("money:" + money);
-	Group root = new Group();
-	
+	Button btn_level1;
+	Button btn_level2;
+	Button btn_level3;
+	Button btn_level4;
+	Button btn_level5;
+	Button btn_explanation;
+	Label titleLabel;
+	Label moneyLabel;
+
 	// === Constructor ===
 	public Choose() {
 		this.choose = this;
 	}
-	
+
 	public Choose(int money) {
 		this.choose = this;
 		this.money = money;
 	}
-	
+
 	// === main ===
 	public static void main(String[] args) {
 		launch(args);
@@ -43,7 +43,7 @@ public class Choose extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+
 		this.primaryStage = primaryStage;
 		primaryStage.setTitle("Choose");
 		primaryStage.setResizable(false);
@@ -54,6 +54,16 @@ public class Choose extends Application {
 		// image2.resize(500, 400);
 		imageBack.setFitWidth(700);
 		imageBack.setFitHeight(470);
+
+		btn_level1 = new Button("Easy");
+		btn_level2 = new Button("Normal");
+		btn_level3 = new Button("Hard");
+		btn_level4 = new Button("Extreme");
+		btn_level5 = new Button("Impossible");
+		btn_explanation = new Button("Explanation");
+		titleLabel = new Label("Select your difficulty level");
+		moneyLabel = new Label("Money: $ " + money);
+		moneyLabel.setAlignment(Pos.CENTER_RIGHT);
 
 		// set buttons
 		btn_level1.setLayoutX(250);
@@ -75,12 +85,12 @@ public class Choose extends Application {
 		btn_level5.setLayoutX(250);
 		btn_level5.setLayoutY(370);
 		btn_level5.setPrefSize(210, 50);
-		
+
 		btn_explanation.setLayoutX(560);
 		btn_explanation.setLayoutY(420);
 
 		titleLabel.setLayoutX(10);
-		moneyLabel.setLayoutX(560);
+		moneyLabel.setLayoutX(540);
 
 		btn_level1.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -112,7 +122,7 @@ public class Choose extends Application {
 				startGame(5);
 			}
 		});
-		
+
 		btn_explanation.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
@@ -121,6 +131,7 @@ public class Choose extends Application {
 		});
 
 		// 添加组件到面板
+		Group root = new Group();
 		root.getChildren().add(canvas);
 		root.getChildren().add(imageBack);
 		root.getChildren().add(btn_level1);
@@ -139,7 +150,7 @@ public class Choose extends Application {
 		primaryStage.show();
 
 	}
-	
+
 	private void openExplanation() {
 		Platform.runLater(new Runnable() {
 			public void run() {
@@ -152,9 +163,9 @@ public class Choose extends Application {
 				}
 			}
 		});
-		
+
 	}
-	
+
 	private void startGame(int level) {
 		Platform.runLater(new Runnable() {
 			public void run() {
@@ -168,12 +179,13 @@ public class Choose extends Application {
 			}
 		});
 	}
-	
+
 	public int getMoney() {
 		return money;
 	}
+
 	public void setMoney(int money) {
 		this.money = money;
 	}
-	
+
 }

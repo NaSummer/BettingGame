@@ -2,6 +2,7 @@ import java.util.Random;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -58,12 +59,13 @@ public class Game extends Application {
 		lab_level = new Label("Level: " + level);
 		lab_rightNum = new Label("Right: " + rightCount);
 		lab_counter = new Label("Counter: " + counter);
-		lab_nowMoney = new Label("Money: " + money);
+		lab_nowMoney = new Label("Money: $ " + money);
 
 		lab_level.setLayoutX(10);
 		lab_rightNum.setLayoutX(100);
-		lab_nowMoney.setLayoutX(560);
 		lab_counter.setLayoutX(190);
+		lab_nowMoney.setLayoutX(540);
+		lab_nowMoney.setAlignment(Pos.CENTER_LEFT);
 
 		root.getChildren().add(imageBack);
 		root.getChildren().add(canvas);
@@ -136,7 +138,7 @@ public class Game extends Application {
 							@Override
 							public void handle(MouseEvent event) {
 								choose.setMoney(money);
-								choose.moneyLabel.setText("Money: " + money);
+								choose.moneyLabel.setText("Money: $ " + money);
 								choose.primaryStage.show();
 								primaryStage.close();
 							}
